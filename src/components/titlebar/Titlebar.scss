@@ -1,0 +1,11 @@
+.dot {
+  @apply rounded-full mx-1 w-3 h-3 py-0 relative inline-block #{!important};
+  -webkit-app-region: no-drag;
+}
+// I'm not sure how this is working but it is
+// so I'm going to leave it here.
+.titlebar {
+  @apply h-title-bar fixed justify-end flex top-0 left-0 right-0;
+  -webkit-app-region: drag;
+  user-select: none;
+}

@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply font-roboto;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+*::after,
+*::before {
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-app-region: no-drag;
+}
+
+html,
+body {
+  @apply rounded-lg #{!important};
+}
+
+h3 {
+  @apply text-2xl font-bold;
+}
+
+html,
+body,
+form,
+main {
+  height: 100%;
+}
+
+#root {
+  @apply rounded-xl overflow-hidden;
+}

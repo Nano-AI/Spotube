@@ -1,0 +1,13 @@
+h1,
+h2,
+p {
+  @apply text-base font-normal;
+}
+
+h2 {
+  @apply text-4xl font-bold #{!important};
+}
+
+.top-icon {
+  @apply w-8 h-8 inline text-white #{!important};
+}
