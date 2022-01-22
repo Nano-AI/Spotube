@@ -1,4 +1,9 @@
 # Stoptube
+This is meant to be a free Spotify version that can import Spotify playlists and such and play them. This uses YouTube to play songs.
+
+So far you can search for any song and play it. I spent too much time making this thing look good that I didn't really focus on functionality.
+
+I'll keep randomly updating this project but I'm not going to be making frequent updates.
 
 ## Todo
 
