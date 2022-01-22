@@ -1,23 +1,23 @@
 import React, { Component } from "react";
-import { SongObj } from "../../types/VideoResults";
+import { PlaylistObj, SongObj } from "../../types/VideoResults";
 
 const { ipcRenderer } = window.require("electron");
 
-class Library extends Component<{}, { songs: SongObj[] }> {
+class Library extends Component<{}, { playlists?: PlaylistObj[] }> {
   _isMounted = false;
   constructor(props: any) {
     super(props);
     this.state = {
-      songs: [],
+      playlists: undefined,
     };
   }
 
   componentDidMount() {
     this._isMounted = true;
-    ipcRenderer.on("playlists", (event: any, arg: SongObj[]) => {
+    ipcRenderer.on("playlists", (event: any, arg: PlaylistObj[]) => {
       if (this._isMounted) {
         this.setState({
-          songs: arg,
+          playlists: arg,
         });
       }
     });
@@ -28,13 +28,17 @@ class Library extends Component<{}, { songs: SongObj[] }> {
   }
 
   render() {
-    ipcRenderer.send("get-playlists", "");
+    if (this.state.playlists == undefined || this.state.playlists.length == 0) {
+      ipcRenderer.send("get-playlists", "");
+    }
+    console.log(this.state.playlists);
     return (
       <div>
         <h2>Library</h2>
-        {this.state.songs.map((song) => (
-          <p>song.title</p>
-        ))}
+        {this.state.playlists?.map((playlist: PlaylistObj) => {
+          console.log(playlist.playlistTitle)
+          return (<p>Name: {playlist.playlistTitle} ID: {playlist.playlistId}</p>);
+        })}
       </div>
     );
   }

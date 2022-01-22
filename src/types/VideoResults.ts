@@ -39,6 +39,14 @@ interface DurationObj {
   played: number; playedSeconds: number; loaded: number; loadedSeconds: number;
 }
 
+interface PlaylistObj {
+  playlistId: string;
+  songs: Array<SongObj>;
+  playlistTitle: string;
+  playlistDescription: string;
+  playlistThumbnail: string;
+}
+
 type SongResultsType = Array<SongObj>;
 
-export type { DurationObj, SongResultsType, SongArtists, SongDuration, SongObj };
+export type { PlaylistObj, DurationObj, SongResultsType, SongArtists, SongDuration, SongObj };

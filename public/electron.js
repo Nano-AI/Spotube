@@ -144,6 +144,7 @@ Playlist Format:
   ],
   playlistTitle: "",
   playlistDescription: "",
+  thumbnail: ""
 }
 */
 
@@ -166,6 +167,7 @@ ipcMain.on("create-playlist", (event, arg) => {
     songs: [],
     playlistTitle: "Unnamed Playlist",
     playlistDescription: "A playlist created by deafult",
+    thumbnail: "",
   });
 });
 
@@ -183,7 +185,9 @@ ipcMain.on("get-playlist", (event, arg) => {
 // Takes in playlist ID and song object
 ipcMain.on("add-song", (event, arg) => {
   console.log("Adding song to playlist " + arg.songObj.title);
-  store.set(arg.playlistId, arg.songObj);
+  let p = store.get(arg.playlistId);
+  p.songs.push(arg.songObj);
+  store.set(arg.playlistId, p);
 });
 
 ipcMain.on("get-playlist-ids", (event, arg) => {
