@@ -74,6 +74,13 @@ class Search extends Component<
             className="px-0 outline-0 border-0 text-searchbar-text bg-searchbar flex-shrink flex-grow leading-normal w-px flex-1 h-10 border-grey-light relative"
             placeholder="Search for a song"
             onChange={(evt) => this.doSearch(evt)}
+            onKeyDown={(evt: any) => {
+              if (evt.code === "Enter") {
+                const electron = window.require("electron");
+                console.log(evt);
+                electron.ipcRenderer.send("search", evt.target.value);
+              }
+            }}
           />
           <div className="flex -mr-px">
             <span className="search-icon rounded-full rounded-l-none pl-1 pr-2 ">

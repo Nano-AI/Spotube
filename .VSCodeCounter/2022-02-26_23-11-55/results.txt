@@ -1,0 +1,92 @@
+Date : 2022-02-26 23:11:55
+Directory : d:\Coding\JavaScript\spotube
+Total : 42 files,  54242 codes, 110 comments, 154 blanks, all 54506 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          3 |     52,866 |          0 |          3 |     52,869 |
+| TypeScript React   |         16 |        834 |         15 |         72 |        921 |
+| JavaScript         |          3 |        262 |         30 |         31 |        323 |
+| SCSS               |          8 |         86 |         23 |         22 |        131 |
+| XML                |          5 |         71 |          0 |          0 |         71 |
+| TypeScript         |          4 |         43 |         19 |         15 |         77 |
+| Markdown           |          1 |         33 |          0 |          9 |         42 |
+| JSON with Comments |          1 |         27 |          0 |          1 |         28 |
+| HTML               |          1 |         20 |         23 |          1 |         44 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                        | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                           |         42 |     54,242 |        110 |        154 |     54,506 |
+| .idea                                                                       |          5 |         71 |          0 |          0 |         71 |
+| public                                                                      |          3 |        244 |         53 |         31 |        328 |
+| src                                                                         |         28 |        963 |         57 |        109 |      1,129 |
+| src\components                                                              |         12 |        578 |         27 |         43 |        648 |
+| src\components\playlist-view                                                |          2 |         12 |          0 |          4 |         16 |
+| src\components\sidenav                                                      |          2 |         80 |          1 |          5 |         86 |
+| src\components\song-player                                                  |          1 |        138 |          1 |          7 |        146 |
+| src\components\song-view                                                    |          2 |        123 |          2 |          5 |        130 |
+| src\components\songs-view                                                   |          1 |         22 |          0 |          3 |         25 |
+| src\components\soundbar                                                     |          2 |        155 |         21 |         15 |        191 |
+| src\components\titlebar                                                     |          2 |         48 |          2 |          4 |         54 |
+| src\pages                                                                   |          6 |        216 |          6 |         28 |        250 |
+| src\pages\create-playlist                                                   |          1 |         15 |          0 |          4 |         19 |
+| src\pages\home                                                              |          1 |         22 |          0 |          4 |         26 |
+| src\pages\library                                                           |          1 |         41 |          0 |          7 |         48 |
+| src\pages\playlist-view                                                     |          1 |         11 |          0 |          3 |         14 |
+| src\pages\search                                                            |          2 |        127 |          6 |         10 |        143 |
+| src\types                                                                   |          1 |         29 |         14 |         10 |         53 |
++-----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                    | language           | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| d:\Coding\JavaScript\spotube\.idea\discord.xml                              | XML                |          6 |          0 |          0 |          6 |
+| d:\Coding\JavaScript\spotube\.idea\modules.xml                              | XML                |          8 |          0 |          0 |          8 |
+| d:\Coding\JavaScript\spotube\.idea\spotube.iml                              | XML                |         12 |          0 |          0 |         12 |
+| d:\Coding\JavaScript\spotube\.idea\vcs.xml                                  | XML                |          6 |          0 |          0 |          6 |
+| d:\Coding\JavaScript\spotube\.idea\workspace.xml                            | XML                |         39 |          0 |          0 |         39 |
+| d:\Coding\JavaScript\spotube\README.md                                      | Markdown           |         33 |          0 |          9 |         42 |
+| d:\Coding\JavaScript\spotube\package-lock.json                              | JSON               |     52,763 |          0 |          1 |     52,764 |
+| d:\Coding\JavaScript\spotube\package.json                                   | JSON               |         78 |          0 |          1 |         79 |
+| d:\Coding\JavaScript\spotube\postcss.config.js                              | JavaScript         |          6 |          0 |          1 |          7 |
+| d:\Coding\JavaScript\spotube\public\electron.js                             | JavaScript         |        199 |         30 |         29 |        258 |
+| d:\Coding\JavaScript\spotube\public\index.html                              | HTML               |         20 |         23 |          1 |         44 |
+| d:\Coding\JavaScript\spotube\public\manifest.json                           | JSON               |         25 |          0 |          1 |         26 |
+| d:\Coding\JavaScript\spotube\src\App.scss                                   | SCSS               |         11 |          0 |          3 |         14 |
+| d:\Coding\JavaScript\spotube\src\App.test.tsx                               | TypeScript React   |          8 |          0 |          2 |         10 |
+| d:\Coding\JavaScript\spotube\src\App.tsx                                    | TypeScript React   |         21 |          2 |          3 |         26 |
+| d:\Coding\JavaScript\spotube\src\Routes.tsx                                 | TypeScript React   |         28 |          0 |          3 |         31 |
+| d:\Coding\JavaScript\spotube\src\components\playlist-view\PlaylistView.scss | SCSS               |          0 |          0 |          1 |          1 |
+| d:\Coding\JavaScript\spotube\src\components\playlist-view\PlaylistView.tsx  | TypeScript React   |         12 |          0 |          3 |         15 |
+| d:\Coding\JavaScript\spotube\src\components\sidenav\SideNav.scss            | SCSS               |          3 |          0 |          1 |          4 |
+| d:\Coding\JavaScript\spotube\src\components\sidenav\SideNav.tsx             | TypeScript React   |         77 |          1 |          4 |         82 |
+| d:\Coding\JavaScript\spotube\src\components\song-player\SongPlayer.tsx      | TypeScript React   |        138 |          1 |          7 |        146 |
+| d:\Coding\JavaScript\spotube\src\components\song-view\SongView.scss         | SCSS               |          3 |          0 |          1 |          4 |
+| d:\Coding\JavaScript\spotube\src\components\song-view\SongView.tsx          | TypeScript React   |        120 |          2 |          4 |        126 |
+| d:\Coding\JavaScript\spotube\src\components\songs-view\SongsView.tsx        | TypeScript React   |         22 |          0 |          3 |         25 |
+| d:\Coding\JavaScript\spotube\src\components\soundbar\Soundbar.scss          | SCSS               |         20 |         21 |          6 |         47 |
+| d:\Coding\JavaScript\spotube\src\components\soundbar\Soundbar.tsx           | TypeScript React   |        135 |          0 |          9 |        144 |
+| d:\Coding\JavaScript\spotube\src\components\titlebar\Titlebar.scss          | SCSS               |          9 |          2 |          1 |         12 |
+| d:\Coding\JavaScript\spotube\src\components\titlebar\Titlebar.tsx           | TypeScript React   |         39 |          0 |          3 |         42 |
+| d:\Coding\JavaScript\spotube\src\index.scss                                 | SCSS               |         34 |          0 |          7 |         41 |
+| d:\Coding\JavaScript\spotube\src\index.tsx                                  | TypeScript React   |         24 |          3 |          5 |         32 |
+| d:\Coding\JavaScript\spotube\src\pages\create-playlist\CreatePlaylist.tsx   | TypeScript React   |         15 |          0 |          4 |         19 |
+| d:\Coding\JavaScript\spotube\src\pages\home\Home.tsx                        | TypeScript React   |         22 |          0 |          4 |         26 |
+| d:\Coding\JavaScript\spotube\src\pages\library\Library.tsx                  | TypeScript React   |         41 |          0 |          7 |         48 |
+| d:\Coding\JavaScript\spotube\src\pages\playlist-view\PlaylistView.tsx       | TypeScript React   |         11 |          0 |          3 |         14 |
+| d:\Coding\JavaScript\spotube\src\pages\search\Search.scss                   | SCSS               |          6 |          0 |          2 |          8 |
+| d:\Coding\JavaScript\spotube\src\pages\search\Search.tsx                    | TypeScript React   |        121 |          6 |          8 |        135 |
+| d:\Coding\JavaScript\spotube\src\react-app-env.d.ts                         | TypeScript         |          0 |          1 |          1 |          2 |
+| d:\Coding\JavaScript\spotube\src\reportWebVitals.ts                         | TypeScript         |         13 |          0 |          3 |         16 |
+| d:\Coding\JavaScript\spotube\src\setupTests.ts                              | TypeScript         |          1 |          4 |          1 |          6 |
+| d:\Coding\JavaScript\spotube\src\types\VideoResults.ts                      | TypeScript         |         29 |         14 |         10 |         53 |
+| d:\Coding\JavaScript\spotube\tailwind.config.js                             | JavaScript         |         57 |          0 |          1 |         58 |
+| d:\Coding\JavaScript\spotube\tsconfig.json                                  | JSON with Comments |         27 |          0 |          1 |         28 |
+| Total                                                                       |                    |     54,242 |        110 |        154 |     54,506 |
++-----------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

@@ -40,7 +40,7 @@ client.on("ready", () => {
   ready = true;
 });
 
-client.login({ clientId }).catch(console.error);
+// client.login({ clientId }).catch(console.error);
 
 var searchSongOnly = true;
 
@@ -165,7 +165,7 @@ ipcMain.on("create-playlist", (event, arg) => {
   store.set(arg, {
     playlistId: arg,
     songs: [],
-    playlistTitle: "Unnamed Playlist",
+    playlistTitle: "New Playlist",
     playlistDescription: "A playlist created by deafult",
     thumbnail: "",
   });
@@ -204,6 +204,21 @@ ipcMain.on("get-playlists", (event, arg) => {
   });
   event.reply("playlists", playlistsObj);
 });
+
+function wipePlaylists() {
+  store.get("playlists").forEach((playlist) => {
+    // delete data using electron store
+    try {
+      store.delete(store.get(playlist.playlistId));
+    } catch (err) {
+      console.log("Error deleting playlist " + playlist);
+    }
+  });
+
+  store.delete("playlists");
+}
+
+wipePlaylists();
 
 function createWindow() {
   // Create the browser window.

@@ -4,12 +4,15 @@ import { v4 as uuidv4 } from "uuid";
 const { ipcRenderer } = window.require("electron");
 
 class CreatePlaylist extends Component<{}> {
+  v: any;
+  componentDidMount() {
+    this.v = uuidv4();
+    ipcRenderer.send("create-playlist", this.v);
+  }
   render() {
-    let v = uuidv4();
-    ipcRenderer.send("create-playlist", v);
     return (
       <div>
-        <p>Created playlist with ID {v} </p>
+        <p>Created playlist with ID {this.v} </p>
       </div>
     );
   }

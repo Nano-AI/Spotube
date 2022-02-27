@@ -113,6 +113,7 @@ class SongView extends Component<{
                     songRef.play_song(songObj);
                   }
                 }}
+                id="play-icon"
               />
             </motion.div>
           </motion.div>

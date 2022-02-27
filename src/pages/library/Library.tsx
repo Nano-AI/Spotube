@@ -1,3 +1,5 @@
+import PlaylistView from "components/playlist-view/PlaylistView";
+import SongView from "components/song-view/SongView";
 import React, { Component } from "react";
 import { PlaylistObj, SongObj } from "../../types/VideoResults";
 
@@ -35,10 +37,12 @@ class Library extends Component<{}, { playlists?: PlaylistObj[] }> {
     return (
       <div>
         <h2>Library</h2>
-        {this.state.playlists?.map((playlist: PlaylistObj) => {
-          console.log(playlist.playlistTitle)
-          return (<p>Name: {playlist.playlistTitle} ID: {playlist.playlistId}</p>);
-        })}
+        <div className="flex flex-row">
+          {this.state.playlists?.map((playlist: PlaylistObj) => {
+            console.log(playlist.playlistTitle)
+            return <PlaylistView playlist={playlist} />;
+          })}
+        </div>
       </div>
     );
   }
