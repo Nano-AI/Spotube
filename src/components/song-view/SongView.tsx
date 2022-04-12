@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { MusicPlayerContext } from "../song-player/SongPlayer";
 import React from "react";
 import "./SongView.scss";
+import { NavLink } from "react-router-dom";
 
 const playMotion = {
   rest: {
@@ -33,6 +34,8 @@ class SongView extends Component<{
   songObj?: SongObj;
   duration?: number;
   className?: string;
+  titleUrl?: string;
+  playButton?: boolean;
 }> {
   // static songRef = SongPlayerRef;
   static contextType = MusicPlayerContext;
@@ -97,7 +100,15 @@ class SongView extends Component<{
               className="w-24 h-24 object-cover mb-2 "
               alt="Top Result"
             />
-            <h3 className="truncate ">{songName}</h3>
+            <h3 className="truncate">
+              {this.props.titleUrl ? (
+                <NavLink to={this.props.titleUrl} draggable="false">
+                  {songName}
+                </NavLink>
+              ) : (
+                songName
+              )}
+            </h3>
             <div className="text-xxs text-song-artist truncate">
               {artistName}
             </div>
@@ -106,15 +117,19 @@ class SongView extends Component<{
               className="relative"
               initial={{ opacity: 0 }}
             >
-              <CirclePlayIcon
-                className="absolute h-16 w-16 opacity-1 float-right right-0 bottom-0 text-secondary-icon-fill cursor-pointer"
-                onClick={() => {
-                  if (songObj) {
-                    songRef.play_song(songObj);
-                  }
-                }}
-                id="play-icon"
-              />
+              {this.props.playButton ? (
+                <CirclePlayIcon
+                  className="absolute h-16 w-16 opacity-1 float-right right-0 bottom-0 text-secondary-icon-fill cursor-pointer"
+                  onClick={() => {
+                    if (songObj) {
+                      songRef.play_song(songObj);
+                    }
+                  }}
+                  id="play-icon"
+                />
+              ) : (
+                <span></span>
+              )}
             </motion.div>
           </motion.div>
         )}

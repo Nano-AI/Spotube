@@ -109,6 +109,7 @@ class Search extends Component<
                     <SongView
                       topResult={true}
                       songObj={this.state.searchResults[0]}
+                      playButton={true}
                     />
                   </div>
                 </div>

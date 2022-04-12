@@ -15,7 +15,7 @@ class PlaylistView extends Component<{playlist: PlaylistObj}> {
                   return;
                 }
             }}>
-               <SongView songName={p.playlistTitle} artistName="By You" topResult={true} picture="" />
+               <SongView songName={p.playlistTitle} artistName="By You" topResult={true} picture="" titleUrl={"/playlist/" + this.props.playlist.playlistId} />
             </div>
         )
     }

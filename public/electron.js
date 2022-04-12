@@ -206,7 +206,12 @@ ipcMain.on("get-playlists", (event, arg) => {
 });
 
 function wipePlaylists() {
-  store.get("playlists").forEach((playlist) => {
+  let playlists = store.get("playlists");
+  if (playlists == undefined) {
+    store.set("playlists", []);
+    return;
+  }
+  playlists.forEach((playlist) => {
     // delete data using electron store
     try {
       store.delete(store.get(playlist.playlistId));
