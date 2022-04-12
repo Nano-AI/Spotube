@@ -8,6 +8,13 @@ So far you can search for any song and play it. I spent too much time making thi
 
 I'll keep randomly updating this project but I'm not going to be making frequent updates.
 
+## Images
+<details open>
+  <img src="https://raw.githubusercontent.com/Nano-AI/Spotube/master/git_images/SC3.png" />
+  <img src="https://raw.githubusercontent.com/Nano-AI/Spotube/master/git_images/SC2.png" />
+  <img src="https://raw.githubusercontent.com/Nano-AI/Spotube/master/git_images/SC1.png" />
+</details>
+
 ## Build instructions
 1. Clone the repo and cd into it by running `git clone https://github.com/Nano-AI/Spotube.git && cd Spotube`. 
 2. Then install the required packages by running `npm i`. 
