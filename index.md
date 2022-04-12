@@ -1,37 +1,48 @@
-## Welcome to GitHub Pages
+# Stoptube
+This project is a proof of concept! I'm not responsible for anything you do with it.
 
-You can use the [editor on GitHub](https://github.com/Nano-AI/Spotube/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This is meant to be a free Spotify version that can import Spotify playlists and such and play them. This uses YouTube to play songs.
 
-### Markdown
+So far you can search for any song and play it. I spent too much time making this thing look good that I didn't really focus on functionality.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+I'll keep randomly updating this project but I'm not going to be making frequent updates.
 
-```markdown
-Syntax highlighted code block
+## Images
+<details open>
+  <img src="https://raw.githubusercontent.com/Nano-AI/Spotube/master/git_images/SC3.png" />
+  <img src="https://raw.githubusercontent.com/Nano-AI/Spotube/master/git_images/SC2.png" />
+  <img src="https://raw.githubusercontent.com/Nano-AI/Spotube/master/git_images/SC1.png" />
+</details>
 
-# Header 1
-## Header 2
-### Header 3
+## Build instructions
+1. Clone the repo and cd into it by running `git clone https://github.com/Nano-AI/Spotube.git && cd Spotube`. 
+2. Then install the required packages by running `npm i`. 
+3. Once done, run `npm start` and `npm run electron` at the same time.
 
-- Bulleted
-- List
+## Uses
+- Framer Motion
+- React
+- Tailwind
+- React-Icons
+- SCSS
 
-1. Numbered
-2. List
+## Todo
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Nano-AI/Spotube/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+- Search for song on enter
+- Get the actual thing done
+- Maybe use framer motion? (maybe with NavLink selection?)
+- Import playlists with files (include draggable files)
+- Make window look better (rounded edges, better titlebar)
+- Add minimum window size
+- Add search channels
+- Search playlists
+- Filter for songs only (?)
+- Make search bar it's own component
+- Fix inconsistent naming in code
+- Make code more readable
+- Align the "Top result" with the songs
+- Setup global styles (like for song and artist names)
+- Cleaner Tailwind Config file
+- Make it so it's based off of a template, everything shouldn't have it's own color
+- Maybe switch to Wails
