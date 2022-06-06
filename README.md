@@ -19,8 +19,8 @@ I'll keep randomly updating this project but I'm not going to be making frequent
 ## Build instructions
 
 1. Clone the repo and cd into it by running `git clone https://github.com/Nano-AI/Spotube.git && cd Spotube`.
-2. Then install the required packages by running `npm i`.
-3. Once done, run `npm start` and `npm run electron` at the same time.
+2. Then install the required packages by running `yarn`.
+3. Once done, run `yarn electron:start`.
 
 ## Uses
 
