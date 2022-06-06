@@ -6,11 +6,13 @@
   "description": "Spotify like app where you can import Spotify playlists and play them in in one app, for free!",
   "author": "Nano-AI",
   "build": {
-    "appId": "com.nano-ai.spotube"
+    "appId": "com.nano-ai.spotube",
+    "mac": {
+      "category": "com.nano-ai.spotube.music.player"
+    }
   },
   "homepage": "./",
   "dependencies": {
-    "@craco/craco": "^5.9.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -21,8 +23,6 @@
     "@types/usetube": "^2.1.0",
     "@types/uuid": "^8.3.3",
     "discord-rpc": "^4.0.1",
-    "electron": "^16.2.2",
-    "electron-build": "^0.0.3",
     "electron-is-dev": "^2.0.0",
     "electron-store": "^8.0.1",
     "framer-motion": "^4.1.17",
@@ -46,7 +46,7 @@
     "start": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build": "react-scripts build && electron-build",
+    "build": "react-scripts build && electron-builder",
     "dev": "concurrently -k \"npm start\" \"yarn run electron\"",
     "electron": "wait-on tcp:3000 && electron ."
   },
@@ -71,8 +71,10 @@
   "devDependencies": {
     "autoprefixer": "^10.4.0",
     "concurrently": "^6.5.1",
+    "electron": "^16.2.2",
     "postcss": "^8.4.5",
     "tailwindcss": "^3.0.7",
-    "wait-on": "^6.0.0"
+    "wait-on": "^6.0.0",
+    "electron-builder": "^23.0.3"
   }
 }
