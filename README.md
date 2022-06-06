@@ -46,7 +46,7 @@ I'll keep randomly updating this project but I'm not going to be making frequent
 - [ ] Clean code
 - [ ] Align the "Top result" with the songs
 - [ ] Setup global styles (like for song and artist names)
-- [-] Cleaner Tailwind Config file
+- [ ] ~~Cleaner Tailwind Config file~~ (Keeping it how it is to add more custom customizability)
 - [ ] Add Discord RPC
 - [ ] Song invites via Discord (?)
 - [ ] Music controls on operating systems (function keys)
