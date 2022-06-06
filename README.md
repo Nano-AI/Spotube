@@ -34,7 +34,7 @@ I'll keep randomly updating this project but I'm not going to be making frequent
 
 - [ ] Search for song on enter
 - [ ] Full functionality
-- [+] Maybe use framer motion? (maybe with NavLink selection?)
+- [x] Maybe use framer motion? (maybe with NavLink selection?)
 - [ ] Import playlists with files (include draggable files)
 - [ ] Make window look better (rounded edges, better titlebar)
 - [ ] Add minimum window size
