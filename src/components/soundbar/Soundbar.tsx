@@ -73,7 +73,6 @@ class Soundbar extends Component<
 
   async handle_input(evt: any) {
     console.log(this.mouseDown);
-    // let musicSlider = document.getElementById("music-slider");
     if (!this.mouseDown) {
       await this.context.change_time(evt.currentTarget.value / 100);
     } else {
@@ -150,13 +149,6 @@ class Soundbar extends Component<
                     id="music-slider"
                     type="range"
                     className="w-1/4 music-slider inline-block align-middle m-0"
-                    // value={
-                    //   this.state.duration?.played && this.timeChangeable
-                    //     ? this.state.duration?.played * 100
-                    //     : 0
-                    // }
-                    // onInput={(evt) => this.handle_input(evt)}
-                    // onMouseUp={(evt) => this.handle_input(evt)}
                     onChange={(evt) => this.handle_input(evt)}
                     onMouseDown={() => {
                       this.mouseDown = true;
