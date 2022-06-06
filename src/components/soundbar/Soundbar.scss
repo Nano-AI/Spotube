@@ -1,16 +1,24 @@
+// .music-slider {
+//   &:hover {
+//     &::-webkit-slider-thumb {
+//       opacity: 1;
+//     }
+//   }
+//   &::-webkit-slider-thumb {
+//     @apply bg-soundbar-thumb rounded-full;
+//     // opacity: 0;
+//   }
+//   &::-webkit-slider-runnable-track {
+//     @apply text-soundbar-progress;
+//   }
+// }
+
 .music-slider {
-  &:hover {
-    &::-webkit-slider-thumb {
-      opacity: 1;
-    }
-  }
-  &::-webkit-slider-thumb {
-    @apply bg-soundbar-thumb rounded-full;
-    opacity: 0;
-  }
-  &::-webkit-slider-runnable-track {
-    @apply text-soundbar-progress;
-  }
+  @apply absolute top-0 left-0 appearance-none w-full h-2 transition rounded bg-transparent outline-none;
+}
+
+.music-slider::-webkit-slider-thumb {
+  @apply appearance-none w-4 h-4 active:w-5 active:h-5 active:ring-8 ring-soundbar-dot/30 rounded-full bg-soundbar-dot cursor-pointer transition-all duration-150;
 }
 
 .time-text {

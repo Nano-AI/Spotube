@@ -1,9 +1,27 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  mode: "jit",
   theme: {
     colors: {
+      /*
+      text               = #FFFFFF
+      subtext            = #F0F0F0
+      sidebar-text       = #FFFFFF
+      main               = #000000
+      sidebar            = #1ed760
+      player             = #000000
+      card               = #000000
+      shadow             = #202020
+      selected-row       = #797979
+      button             = #1ed760
+      button-active      = #1ed760
+      button-disabled    = #535353
+      tab-active         = #166632
+      notification       = #1db954
+      notification-error = #e22134
+      misc               = #BFBFBF
+      */
       transparent: "transparent",
-      current: "currentColor",
       "url-text": "#b3b3b3",
       "url-hover": "#ffffff",
       "sidebar-background": "#000000",
@@ -32,6 +50,7 @@ module.exports = {
       "soundbar-progress": "#b3b3b3",
       "soundbar-thumb": "#ffffff",
       "soundbar-time-text": "#b3b3b3",
+      "playlist-description": "#bebebe",
     },
     fontFamily: {
       roboto: ["'Roboto'", "sans-serif"],
@@ -44,6 +63,10 @@ module.exports = {
       padding: {
         4: "1rem",
       },
+      colors: {
+        transparent: "transparent",
+        "soundbar-dot": "#1ed760",
+      },
     },
     fontSize: {
       xxs: "0.775rem",
@@ -51,7 +74,22 @@ module.exports = {
       sm: ".875rem",
       "2xl": "1.5rem",
       smaller: "0.95rem",
+      xs: ".75rem",
+      sm: ".875rem",
+      tiny: ".875rem",
+      base: "1rem",
+      lg: "1.125rem",
+      xl: "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
+      "6xl": "4rem",
+      "7xl": "5rem",
     },
+  },
+  variants: {
+    textColor: ["responsive", "hover", "focus", "group-hover"],
   },
   plugins: [],
 };

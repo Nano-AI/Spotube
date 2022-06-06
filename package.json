@@ -7,8 +7,23 @@
   "author": "Nano-AI",
   "build": {
     "appId": "com.nano-ai.spotube",
+    "productName": "Spotube",
+    "directories": {
+      "buildResources": "public"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
     "mac": {
+      "target": "dmg",
       "category": "com.nano-ai.spotube.music.player"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "deb"
     }
   },
   "homepage": "./",
@@ -46,9 +61,11 @@
     "start": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build": "react-scripts build && electron-builder",
-    "dev": "concurrently -k \"npm start\" \"yarn run electron\"",
-    "electron": "wait-on tcp:3000 && electron ."
+    "build": "react-scripts build",
+    "electron:start": "concurrently -k \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electronmon .\"",
+    "electron:package:mac": "yarn build && electron-builder -m -c.extraMetadata.main=build/electron.js",
+    "electron:package:win": "yarn build && electron-builder -w -c.extraMetadata.main=build/electron.js",
+    "electron:package:linux": "yarn build && electron-builder -l -c.extraMetadata.main=build/electron.js"
   },
   "eslintConfig": {
     "extends": [
@@ -58,14 +75,10 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "last 1 electron version"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 electron version"
     ]
   },
   "devDependencies": {

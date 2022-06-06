@@ -37,6 +37,8 @@ class Soundbar extends Component<
   duration?: DurationObj;
   timeChangeable: boolean = true;
   totalDuration: number = 0;
+  mouseDown: boolean = false;
+
   constructor(props: any) {
     super(props);
     this.state = {
@@ -47,6 +49,7 @@ class Soundbar extends Component<
   }
 
   componentDidMount() {
+    this.updateTimeValue(0);
     let songRef: SongPlayer = this.context;
     songRef.add_update((song: SongObj) => {
       this.totalDuration = songRef.get_total_duration();
@@ -56,6 +59,7 @@ class Soundbar extends Component<
     });
     songRef.add_duration_update((duration: DurationObj) => {
       this.totalDuration = songRef.get_total_duration();
+      this.updateTimeValue(duration.played * 100);
       this.setState({
         duration: duration,
       });
@@ -67,8 +71,25 @@ class Soundbar extends Component<
     });
   }
 
-  handle_input(evt: any) {
-    this.context.change_time(evt.currentTarget.value / 100);
+  async handle_input(evt: any) {
+    console.log(this.mouseDown);
+    // let musicSlider = document.getElementById("music-slider");
+    if (!this.mouseDown) {
+      await this.context.change_time(evt.currentTarget.value / 100);
+    } else {
+      this.updateTimeValue(evt.currentTarget.value);
+    }
+  }
+
+  updateTimeValue(time: number) {
+    let progressSlider = document.getElementById("progress-slider");
+    let musicSlider: any = document.getElementById("music-slider");
+    if (progressSlider == null || musicSlider == null) {
+      console.log("Slider and progress slider not found!!!");
+      return;
+    }
+    progressSlider.style.width = time + "%";
+    musicSlider.value = time;
   }
 
   render() {
@@ -117,19 +138,35 @@ class Soundbar extends Component<
                 </div>
               </div>
               <div>
-                <p className="time-text" id="duration">
+                <p className="time-text inline-block" id="duration">
                   {secondsToHMS(this.state.duration?.playedSeconds)}
                 </p>
-                <input
-                  type="range"
-                  className="mx-2 w-1/2 music-slider inline-block align-middle"
-                  value={
-                    this.state.duration?.played && this.timeChangeable
-                      ? this.state.duration?.played * 100
-                      : 0
-                  }
-                  onInput={(evt) => this.handle_input(evt)}
-                />
+                <div className="content-center relative bg-soundbar-fill w-1/2 h-2 rounded inline-block mr-2 ml-2">
+                  <div
+                    id="progress-slider"
+                    className="absolute top-0 left-0 h-2 rounded-l-md w-1/2 bg-soundbar-progress"
+                  ></div>
+                  <input
+                    id="music-slider"
+                    type="range"
+                    className="w-1/4 music-slider inline-block align-middle m-0"
+                    // value={
+                    //   this.state.duration?.played && this.timeChangeable
+                    //     ? this.state.duration?.played * 100
+                    //     : 0
+                    // }
+                    // onInput={(evt) => this.handle_input(evt)}
+                    // onMouseUp={(evt) => this.handle_input(evt)}
+                    onChange={(evt) => this.handle_input(evt)}
+                    onMouseDown={() => {
+                      this.mouseDown = true;
+                    }}
+                    onMouseUp={(evt) => {
+                      this.mouseDown = false;
+                      this.handle_input(evt);
+                    }}
+                  />
+                </div>
                 <p className="time-text">{secondsToHMS(this.totalDuration)}</p>
               </div>
             </div>
