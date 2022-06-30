@@ -36,6 +36,7 @@ class SongView extends Component<{
   className?: string;
   titleUrl?: string;
   playButton?: boolean;
+  uuid?: string;
 }> {
   // static songRef = SongPlayerRef;
   static contextType = MusicPlayerContext;
@@ -43,6 +44,19 @@ class SongView extends Component<{
     const electron = window.require("electron");
     electron.ipcRenderer.send("play-song", id);
   }
+
+  handleRightClick() {
+    let rightClick = document.getElementById(`${this.props.uuid}ContextMenu`);
+    if (!rightClick) return;
+    rightClick.style.display = "block";
+  }
+
+  componentDidMount() {
+    let uuid = require("uuid");
+    // this.props.uuid = uuid.v4();
+    this.setState({ uuid: uuid.v4() });
+  }
+
   render() {
     const topResult = this.props.topResult || false;
     const songObj = this.props.songObj;
@@ -54,11 +68,56 @@ class SongView extends Component<{
       songObj?.artists.map((artist) => artist.name).join(", ");
     const duration = this.props.duration || songObj?.duration.label;
     let songRef = this.context;
-    console.log(songObj);
+
     return (
-      <div>
+      <div onContextMenu={this.handleRightClick}>
         {!topResult ? (
           <div className="">
+            <div
+              id={`${this.props.uuid}ContextMenu`}
+              className="context-menu"
+              style={{ display: "none" }}
+            >
+              <ul className="menu">
+                <li className="share">
+                  <a href="#">
+                    <i className="fa fa-share" aria-hidden="true"></i> Share
+                  </a>
+                </li>
+                <li className="rename">
+                  <a href="#">
+                    <i className="fa fa-pencil" aria-hidden="true"></i> Rename
+                  </a>
+                </li>
+                <li className="link">
+                  <a href="#">
+                    <i className="fa fa-link" aria-hidden="true"></i> Copy Link
+                    Address
+                  </a>
+                </li>
+                <li className="copy">
+                  <a href="#">
+                    <i className="fa fa-copy" aria-hidden="true"></i> Copy to
+                  </a>
+                </li>
+                <li className="paste">
+                  <a href="#">
+                    <i className="fa fa-paste" aria-hidden="true"></i> Move to
+                  </a>
+                </li>
+                <li className="download">
+                  <a href="#">
+                    <i className="fa fa-download" aria-hidden="true"></i>{" "}
+                    Download
+                  </a>
+                </li>
+                <li className="trash">
+                  <a href="#">
+                    <i className="fa fa-trash" aria-hidden="true"></i> Delete
+                  </a>
+                </li>
+              </ul>
+            </div>
             <div className="group px-2 py-2 hover:bg-hover-song-bg rounded">
               <div className="relative inline-block mr-4">
                 <img
