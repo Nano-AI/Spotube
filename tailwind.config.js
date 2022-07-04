@@ -1,6 +1,7 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   mode: "jit",
+  purge: ["./public/**/*.html", "./src/**/*.{js,jsx,ts,tsx,vue}"],
   theme: {
     colors: {
       /*
@@ -51,6 +52,9 @@ module.exports = {
       "soundbar-thumb": "#ffffff",
       "soundbar-time-text": "#b3b3b3",
       "playlist-description": "#bebebe",
+      "playlist-edit-background": "#282828",
+      "playlist-edit-field": "#3E3E3E",
+      "playlist-edit-field-text": "#EAEAEA",
     },
     fontFamily: {
       roboto: ["'Roboto'", "sans-serif"],
@@ -66,6 +70,12 @@ module.exports = {
       colors: {
         transparent: "transparent",
         "soundbar-dot": "#1ed760",
+      },
+      zIndex: {
+        "-1": "-1",
+      },
+      transformOrigin: {
+        0: "0%",
       },
     },
     fontSize: {
@@ -91,5 +101,6 @@ module.exports = {
   variants: {
     textColor: ["responsive", "hover", "focus", "group-hover"],
   },
+  borderColor: ["responsive", "hover", "focus", "focus-within"],
   plugins: [],
 };

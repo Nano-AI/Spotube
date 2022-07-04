@@ -153,6 +153,9 @@ Playlist Format:
 ipcMain.on("create-playlist", (event, arg) => {
   console.log("Creating playlist with ID " + arg);
   let p = store.get("playlists");
+  if (p == undefined) {
+    p = [];
+  }
   console.log(p);
   if (type(p) != "array") {
     console.error("Error: Playlist is not an array");
@@ -161,13 +164,41 @@ ipcMain.on("create-playlist", (event, arg) => {
   }
   if (p.includes(arg)) return;
   p.push(arg);
+  console.log(p);
   store.set("playlists", p);
   store.set(arg, {
     playlistId: arg,
     songs: [],
     playlistTitle: "New Playlist",
     playlistDescription: "A playlist created by deafult",
-    thumbnail: "",
+    playlistThumbnail: "",
+  });
+  console.log(store.get("playlists"));
+  event.reply("created-playlist", arg);
+});
+
+/*
+  arg - {
+    id - The id of the playlist,
+    title - The title of the playlist,
+    description - The description of the playlist,
+    thumbnail - The thumbnail of the playlist
+  }
+*/
+ipcMain.on("edit-playlist-details", (event, arg) => {
+  console.log("Editing playlist with ID " + arg["id"]);
+  console.log(arg);
+  let p = store.get(arg.id);
+  if (p == undefined) {
+    console.log("Requesting unknown playlist");
+    return;
+  }
+  store.set(arg.id, {
+    playlistId: arg.id,
+    songs: p.songs,
+    playlistTitle: arg.title,
+    playlistDescription: arg.description,
+    playlistThumbnail: arg.thumbnail,
   });
 });
 

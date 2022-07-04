@@ -87,7 +87,7 @@ class Soundbar extends Component<
       console.log("Slider and progress slider not found!!!");
       return;
     }
-    progressSlider.style.width = time + "%";
+    progressSlider.style.width = Math.ceil(time) + "%";
     musicSlider.value = time;
   }
 

@@ -1,0 +1,11 @@
+#edit-box {
+  @apply bg-playlist-edit-background rounded-lg;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#popup-background {
+  background: rgba(0, 0, 0, 0.7);
+}
