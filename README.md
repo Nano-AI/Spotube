@@ -31,7 +31,8 @@ I'll keep randomly updating this project but I'm not going to be making frequent
 - SCSS
 
 ## Todo
-- [ ] **FIX BUG WHERE PLAYING MUSIC AND CREATING A PLAYLIST STOPS MUSIC**
+- [X] **FIX BUG WHERE PLAYING MUSIC AND CREATING A PLAYLIST STOPS MUSIC**
+- [ ] **FIX OVERFLOW OF PLAYLISTS**
 - [ ] Search for song on enter
 - [ ] Full functionality
 - [x] Maybe use framer motion? (maybe with NavLink selection?)

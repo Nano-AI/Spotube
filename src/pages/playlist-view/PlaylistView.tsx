@@ -1,3 +1,4 @@
+import SongView from "components/song-view/SongView";
 import React, { Component } from "react";
 import { PlaylistObj, SongObj } from "types/VideoResults";
 import { urlToHttpOptions } from "url";
@@ -53,6 +54,14 @@ class PlaylistView extends Component<
     if (!this.state.playlist) {
       ipcRenderer.send("get-playlist", window.location.href.split("/").at(-1));
     }
+
+    const toggleEdit = () => {
+      this.setState({
+        edit_hidden:
+          this.state.edit_hidden == "" ? "hidden -z-50" : "",
+      });
+    };
+
     return (
       <div>
         <div
@@ -87,10 +96,7 @@ class PlaylistView extends Component<
                     data-modal-toggle="authentication-modal"
                     onClick={() => {
                       console.log(this.state.edit_hidden);
-                      this.setState({
-                        edit_hidden:
-                          this.state.edit_hidden == "" ? "hidden -z-50" : "",
-                      });
+                      toggleEdit();
                     }}
                   >
                     <svg
@@ -190,7 +196,14 @@ class PlaylistView extends Component<
                           description: this.description,
                           thumbnail: this.state.thumbnail,
                         });
-                        window.location.reload();
+                        let playlist = this.state.playlist;
+                        if (!playlist) return;
+                        playlist.playlistDescription = this.description;
+                        playlist.playlistTitle = this.title;
+                        toggleEdit();
+                        this.setState({
+                          playlist: playlist
+                        });
                       }}
                     >
                       Save
@@ -221,9 +234,12 @@ class PlaylistView extends Component<
               {this.state.playlist?.playlistDescription}
             </p>
           </h2>
-
-          {this.state.playlist?.songs.map((song: SongObj) => {
-            return <div>{song.title}</div>;
+        </div>
+        <div>
+          {this.state.playlist?.songs.map((song: SongObj, i) => {
+            return <div>
+              <SongView className="block" songObj={song}></SongView>
+            </div>
           })}
         </div>
       </div>
