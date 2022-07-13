@@ -82,11 +82,15 @@ function parseVideoToSong(video) {
 
 ipcMain.on("search", async (event, arg) => {
   console.log("Searching for " + arg);
-  const results = searchSongOnly
+  var results = searchSongOnly
     ? await ytMusic.searchMusics(arg).catch((err) => console.error(err))
     : parseVideoToSong(
         await usetube.searchVideo(arg).catch((err) => console.error(err))
       );
+  for (let x = 0; x < results.length; x++) {
+    results[x]['thumbnailUrl'] = `https://img.youtube.com/vi/${results[x]['youtubeId']}/mqdefault.jpg`
+  }
+  // console.log(results);
   event.reply("search-results", results);
 });
 
@@ -187,7 +191,7 @@ ipcMain.on("create-playlist", (event, arg) => {
 */
 ipcMain.on("edit-playlist-details", (event, arg) => {
   console.log("Editing playlist with ID " + arg["id"]);
-  console.log(arg);
+  // console.log(arg);
   let p = store.get(arg.id);
   if (p == undefined) {
     console.log("Requesting unknown playlist");
@@ -254,7 +258,7 @@ function wipePlaylists() {
   store.delete("playlists");
 }
 
-wipePlaylists();
+// wipePlaylists();
 
 function createWindow() {
   // Create the browser window.

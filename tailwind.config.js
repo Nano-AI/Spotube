@@ -55,6 +55,9 @@ module.exports = {
       "playlist-edit-background": "#282828",
       "playlist-edit-field": "#3E3E3E",
       "playlist-edit-field-text": "#EAEAEA",
+      "context-menu-background": "#282828",
+      "context-menu-text": "#eaeaea",
+      "context-menu-background-hover": "#3e3e3e"
     },
     fontFamily: {
       roboto: ["'Roboto'", "sans-serif"],

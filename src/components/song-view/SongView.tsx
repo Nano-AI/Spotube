@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { SongObj } from "../../types/VideoResults";
+import { PlaylistObj, SongObj } from "../../types/VideoResults";
 import { HiPlay as CirclePlayIcon } from "react-icons/hi";
 // import { BsFillPlayFill as PlayIcon } from "react-icons/bs";
 import { BiPlay as PlayIcon } from "react-icons/bi";
@@ -8,6 +8,7 @@ import { MusicPlayerContext } from "../song-player/SongPlayer";
 import React from "react";
 import "./SongView.scss";
 import { NavLink } from "react-router-dom";
+import { RiFlaskLine } from "react-icons/ri";
 
 const playMotion = {
   rest: {
@@ -26,35 +27,46 @@ const playMotion = {
   },
 };
 
-class SongView extends Component<{
-  songName?: string;
-  artistName?: string;
-  picture?: string;
-  topResult?: boolean;
-  songObj?: SongObj;
-  duration?: number;
-  className?: string;
-  titleUrl?: string;
-  playButton?: boolean;
-  uuid?: string;
-}> {
+class SongView extends Component<
+  {
+    songName?: string;
+    artistName?: string;
+    picture?: string;
+    topResult?: boolean;
+    songObj?: SongObj;
+    duration?: number;
+    className?: string;
+    titleUrl?: string;
+    playButton?: boolean;
+    uuid?: string;
+  },
+  {
+    playlists?: PlaylistObj[];
+  }
+> {
   // static songRef = SongPlayerRef;
   static contextType = MusicPlayerContext;
+  _isMounted = false;
   play_song(id: string) {
     const electron = window.require("electron");
     electron.ipcRenderer.send("play-song", id);
   }
 
-  handleRightClick() {
-    let rightClick = document.getElementById(`${this.props.uuid}ContextMenu`);
-    if (!rightClick) return;
-    rightClick.style.display = "block";
-  }
-
   componentDidMount() {
     let uuid = require("uuid");
     // this.props.uuid = uuid.v4();
-    this.setState({ uuid: uuid.v4() });
+    this._isMounted = true;
+    const electron = window.require("electron");
+    electron.ipcRenderer.send("get-playlists");
+    electron.ipcRenderer.on("playlists", (event: any, arg: PlaylistObj[]) => {
+      if (this._isMounted) {
+        console.log(arg);
+        this.setState({
+          playlists: arg,
+        });
+      }
+    });
+    this.setState({ playlists: [] });
   }
 
   render() {
@@ -69,54 +81,146 @@ class SongView extends Component<{
     const duration = this.props.duration || songObj?.duration.label;
     let songRef = this.context;
 
+    const handleRightClick = (event: any) => {
+      console.log("Right clicked on me! ");
+      // let rightClick = document.getElementById(`${this.props.uuid}ContextMenu`);
+      let rightClick = document.getElementById(`ContextMenu`);
+      if (!rightClick) return;
+      console.log(this.props);
+      rightClick.style.display = "";
+      // console.log(event.x, event.y, event)
+      rightClick.style.position = "absolute";
+      rightClick.style.left = event.clientX + "px";
+      rightClick.style.top = event.clientY + "px";
+      rightClick.style.zIndex = "999";
+    };
+
+    const hoverAddPlaylist = (event: any) => {
+      // let add_side = document.getElementById(`${this.props.uuid}AddPlaylistDropdown`);
+      // let add = document.getElementById(`${this.props.uuid}AddToPlaylistButton`);
+      let add_side = document.getElementById(`AddPlaylistDropdown`);
+      let add = document.getElementById(`AddToPlaylistButton`);
+      if (!add || !add_side) return;
+      add_side.style.display = "";
+      let pos = add.offsetTop;
+      // console.log(add.offsetHeight, add.offsetLeft, add.offsetParent, add.offsetTop, add.offsetWidth)
+      add_side.style.marginTop = pos + "px";
+    };
+
+    // const noHoverAddPlaylist = (e: any) => {
+    //   let add_side = document.getElementById(`AddPlaylistDropdown`);
+    //   let add = document.getElementById(`AddToPlaylistButton`);
+    //   let contextMenu = document.getElementById(`ContextMenu`);
+    //   if (!add || !add_side || !contextMenu) return;
+    //   let mouse: any = e.target;
+    //   console.log(add?.contains(mouse), add_side.contains(mouse), contextMenu.contains(mouse))
+    //   if ((add.contains(mouse) || add_side.contains(mouse)) && contextMenu.contains(mouse)) return;
+    //   add_side.style.display = "none";
+    //   // add.style.display = "none";
+    // }
+    
+    const hideRightClick = (e: any) => {
+      let add = document.getElementById(`ContextMenu`);
+      let add_side = document.getElementById(`AddPlaylistDropdown`);
+      let contextMenu = document.getElementById(`ContextMenu`);
+      if (!add || !add_side || !contextMenu) return;
+      let mouse: any = e.target;
+      if (
+        (add.contains(mouse) || add.contains(mouse)) &&
+        contextMenu.contains(mouse)
+      )
+        return;
+      add_side.style.display = "none";
+      add.style.display = "none";
+    }
+
+    window.addEventListener("click", (e) => {
+      hideRightClick(e);
+    });
+
+    // document.body.addEventListener("click", (event) => {
+    //   let rightClick = document.getElementById(`ContextMenu`);
+    //   let add_side = document.getElementById(`AddPlaylistDropdown`);
+    //   if (!rightClick || !add_side) return;
+    //   add_side.style.display = "none";
+    //   rightClick.style.display = "none";
+    // });
+
+    const addToPlaylist = (id: string) => {
+      const electron = window.require("electron");
+      electron.ipcRenderer.send("add-song", {
+        playlistId: id,
+        songObj: songObj
+      });
+    };
+
     return (
-      <div onContextMenu={this.handleRightClick}>
+      <div onContextMenu={handleRightClick}>
         {!topResult ? (
           <div className="">
             <div
-              id={`${this.props.uuid}ContextMenu`}
+              id={`ContextMenu`}
               className="context-menu"
               style={{ display: "none" }}
             >
-              <ul className="menu">
-                <li className="share">
-                  <a href="#">
-                    <i className="fa fa-share" aria-hidden="true"></i> Share
-                  </a>
-                </li>
-                <li className="rename">
-                  <a href="#">
-                    <i className="fa fa-pencil" aria-hidden="true"></i> Rename
-                  </a>
-                </li>
-                <li className="link">
-                  <a href="#">
-                    <i className="fa fa-link" aria-hidden="true"></i> Copy Link
-                    Address
-                  </a>
-                </li>
-                <li className="copy">
-                  <a href="#">
-                    <i className="fa fa-copy" aria-hidden="true"></i> Copy to
-                  </a>
-                </li>
-                <li className="paste">
-                  <a href="#">
-                    <i className="fa fa-paste" aria-hidden="true"></i> Move to
-                  </a>
-                </li>
-                <li className="download">
-                  <a href="#">
-                    <i className="fa fa-download" aria-hidden="true"></i>{" "}
-                    Download
-                  </a>
-                </li>
-                <li className="trash">
-                  <a href="#">
-                    <i className="fa fa-trash" aria-hidden="true"></i> Delete
-                  </a>
-                </li>
-              </ul>
+              <div>
+                <div
+                  id={`AddPlaylistDropdown`}
+                  style={{ display: "none" }}
+                  className="float-right bg-context-menu-background w-60 rounded-lg flex flex-col text-sm py-4 px-2 text-gray-500 shadow-lg ml-1"
+                >
+                  {() => {
+                    console.log(this.state, this.state.playlists)
+                  }}
+                  {(this._isMounted && this.state.playlists) ? this.state.playlists.map((playlist: PlaylistObj) => {
+                    return (<div className="flex hover:bg-context-menu-background-hover py-1 px-2 rounded" onClick={(e) => {
+                      addToPlaylist(playlist.playlistId);
+                      hideRightClick(e);
+                    }}>
+                      <div>{playlist.playlistTitle}</div>
+                    </div>);
+                  }) : ""}
+                </div>
+                <div className="bg-context-menu-background w-60 rounded-lg flex flex-col text-sm py-4 px-2 text-gray-500 shadow-lg">
+                  {/* <div className="flex hover:bg-context-menu-background-hover py-1 px-2 rounded">
+                    <div className="w-8 text-gray-900">
+                      H<span className="text-xs">1</span>
+                    </div>
+                    <div># Heading 1</div>
+                  </div>
+                  <div className="flex hover:bg-context-menu-background-hover py-1 px-2 rounded">
+                    <div className="w-8 text-gray-900">
+                      H<span className="text-xs">2</span>
+                    </div>
+                    <div>## Heading 2</div>
+                  </div>
+                  <div className="flex hover:bg-context-menu-background-hover py-1 px-2 rounded">
+                    <div className="w-8 text-gray-900">
+                      H<span className="text-xs">3</span>
+                    </div>
+                    <div>### Heading 3</div>
+                  </div>
+                  <div className="flex hover:bg-context-menu-background-hover py-1 px-2 rounded">
+                    <div className="w-8 text-gray-900">
+                      H<span className="text-xs">4</span>
+                    </div>
+                    <div>#### Heading 4</div>
+                  </div>
+                  <hr className="my-3 border-gray-300" /> */}
+                  <div
+                    id={`AddToPlaylistButton`}
+                    className="flex hover:bg-context-menu-background-hover py-1 px-2 rounded"
+                    onMouseOver={hoverAddPlaylist}
+                  >
+                    {/* <div className="w-8 text-gray-900 font-bold">B</div> */}
+                    <div>Add to playlist</div>
+                  </div>
+                  {/* <div className="flex hover:bg-context-menu-background-hover py-1 px-2 rounded">
+                    <div className="w-8 text-gray-900 italic">i</div>
+                    <div>**Italic**</div>
+                  </div> */}
+                </div>
+              </div>
             </div>
             <div className="group px-2 py-2 hover:bg-hover-song-bg rounded">
               <div className="relative inline-block mr-4">

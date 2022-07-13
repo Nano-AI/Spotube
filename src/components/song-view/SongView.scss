@@ -1,3 +1,7 @@
 .duration {
   @apply text-duration #{!important};
 }
+
+.context-menu {
+  position: absolute !important;
+}
