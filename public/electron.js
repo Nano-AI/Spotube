@@ -7,6 +7,10 @@ const ytMusic = require("node-youtube-music");
 const { screen } = require("electron");
 const RPC = require("discord-rpc");
 const Store = require("electron-store");
+const fetch = require('isomorphic-unfetch')
+const { getData, getPreview, getTracks, getDetails } = require('spotify-url-info')(fetch);
+const { v4 } = require("uuid");
+const ElectronStore = require("electron-store");
 
 const clientId = "925459367380271134";
 const scopes = ["rpc", "rpc.api", "messages.read"];
@@ -238,6 +242,39 @@ ipcMain.on("get-playlists", (event, arg) => {
     playlistsObj.push(store.get(playlist));
   });
   event.reply("playlists", playlistsObj);
+});
+
+ipcMain.on("import-playlist", async (event, arg) => {
+  var playlist = await getPreview(arg);
+  var tracks = await getTracks(arg);
+  // console.log(playlist);
+  // return;
+  console.log("Searching for " + arg);
+  var output = [];
+  for (let x = 0; x < tracks.length; x++) {
+    let title = tracks[x].name;
+    var results = searchSongOnly
+      ? await ytMusic.searchMusics(title).catch((err) => console.error(err))
+      : parseVideoToSong(
+          await usetube.searchVideo(title).catch((err) => console.error(err))
+        );
+      results[0]['thumbnailUrl'] = `https://img.youtube.com/vi/${results[x]['youtubeId']}/mqdefault.jpg`
+    console.log(results[0])
+    output.push(results[0]);
+  };
+  let playlistId = v4();
+  let playlists = store.get("playlists");
+  playlists.push(playlistId);
+  store.set("playlists", playlists);
+  store.set(playlistId, {
+    playlistId: playlistId,
+    playlistTitle: playlist.title,
+    playlistDescription: playlist.description,
+    thumbnail: playlist.image,
+    songs: output
+  });
+  console.log("Done importing")
+  event.reply("done-importing");
 });
 
 function wipePlaylists() {
